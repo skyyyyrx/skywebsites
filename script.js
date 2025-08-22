@@ -1,24 +1,34 @@
 const hamburgerBtn = document.getElementById('hamburger-btn');
 const navMenu = document.getElementById('nav-menu');
+const body = document.body;
 
-// Toggle menu saat tombol hamburger diklik
+// Toggle buka/tutup menu
 hamburgerBtn.addEventListener('click', () => {
-    hamburgerBtn.classList.toggle('active');
+    const isActive = hamburgerBtn.classList.toggle('active');
     navMenu.classList.toggle('active');
+
+    // Tambah/hapus blur di body
+    if (isActive) {
+        body.classList.add('menu-open');
+    } else {
+        body.classList.remove('menu-open');
+    }
 });
 
-// Tutup menu kalau klik link di dalam nav
+// Tutup otomatis kalau klik link di dalam menu
 document.querySelectorAll('#nav-menu a').forEach(link => {
     link.addEventListener('click', () => {
         hamburgerBtn.classList.remove('active');
         navMenu.classList.remove('active');
+        body.classList.remove('menu-open');
     });
 });
 
-// Tutup menu kalau klik di luar area nav
+// Tutup otomatis kalau klik di luar menu & tombol
 document.addEventListener('click', (e) => {
-    if (!hamburgerBtn.contains(e.target) && !navMenu.contains(e.target)) {
+    if (!navMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
         hamburgerBtn.classList.remove('active');
         navMenu.classList.remove('active');
+        body.classList.remove('menu-open');
     }
 });
