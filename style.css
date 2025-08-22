@@ -293,3 +293,10 @@ footer {
         text-align: center;
     }
 }
+
+/* Efek blur background saat menu terbuka */
+body.menu-open > *:not(header):not(#nav-menu) {
+    filter: blur(5px);
+    transition: filter 0.3s ease;
+}
+
